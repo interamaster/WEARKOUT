@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <android.support.wearable.view.CircledImageView
+        android:id="@+id/circled_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:circle_color="#2979FF"
+        app:circle_radius="60dp"
+        android:layout_marginBottom="5dp" />
+    <TextView
+        android:id="@+id/label"
+        android:text="111"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/circled_image"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

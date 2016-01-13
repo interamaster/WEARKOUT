@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+    <SwitchPreference
+        android:key="use_location"
+        android:title="@string/title_location"
+        android:summaryOn="@string/summary_show"
+        android:summaryOff="@string/summary_hide"
+        app:wear_iconOn="@drawable/ic_play"
+        app:wear_iconOff="@drawable/ic_pause"
+        android:defaultValue="true"
+        />
+
+    <ListPreference
+        android:key="language"
+        android:title="@string/title_language"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_language"
+        android:entryValues="@array/values_language"
+        app:wear_entryIcons="@array/icons_language"
+        android:defaultValue="en"
+        />
+
+
+</PreferenceScreen>
