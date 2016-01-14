@@ -470,7 +470,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
         String mDrawableName = ejerciocioQueToca.get_Gif_name();
         int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
-        String GifPath = "android.resource://jrdv.mio.com.customnotification/"+resID;
+        String GifPath = "android.resource://com.mio.jrdv.wearkout/"+resID;
 
 
         Ion.with(GifVew)
@@ -556,7 +556,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
                 .fitXY()
                 .animateGif(AnimateGifMode.ANIMATE)
                 // .load("android.resource://[packagename]" + R.drawable.optinscreen_map)
-                 .load("android.resource://jrdv.mio.com.customnotification/" + R.drawable.normal_heart_rate1);
+                 .load("android.resource://com.mio.jrdv.wearkout/" + R.drawable.normal_heart_rate1);
 
 
 
