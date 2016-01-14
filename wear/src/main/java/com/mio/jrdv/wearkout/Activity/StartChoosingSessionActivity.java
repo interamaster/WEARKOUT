@@ -3,7 +3,9 @@ package com.mio.jrdv.wearkout.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.wearable.view.CircledImageView;
 import android.support.wearable.view.DismissOverlayView;
 import android.support.wearable.view.DotsPageIndicator;
@@ -57,6 +59,10 @@ public class StartChoosingSessionActivity extends Activity {
 
 
 
+    //para los valores recueprados de las prefs
+
+    int ejercicio_time,ejercicio_delay,nuemro_repes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,53 @@ public class StartChoosingSessionActivity extends Activity {
         mDismissOverlay.showIntroIfNecessary();
 
 
+
+       //recuepermos valores àra los intent!!!
+
+
+        /*
+        Pasar de String a int
+
+        Utilizamos el método parseInt de la clase Integer.
+             String cadena = "1234";
+            int numero = 0;
+             numero = Integer.parseInt(cadena)
+         */
+
+
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+
+            boolean aready_choosen_prefs=preferences.getBoolean("pref_choosen",false);
+        if(!aready_choosen_prefs){
+
+            //si aun no se eligio nunca los settings nos manda a ellos del tiron:
+
+            startActivity(new Intent(StartChoosingSessionActivity.this,
+                    MyPreferenceActivity.class));
+            finish();
+        }
+
+            ejercicio_time=Integer.parseInt(preferences.getString("ejercicio_time",null));
+            ejercicio_delay=Integer.parseInt(preferences.getString("delay_time",null));
+            nuemro_repes=Integer.parseInt(preferences.getString("numero_repeticiones",null));
+
+
+        if(ejercicio_delay==0){
+            ejercicio_delay=40;
+        }
+
+        if(ejercicio_time==0){
+            ejercicio_time=40;
+        }
+
+        if(nuemro_repes==0){
+            nuemro_repes=1;
+        }
+
+        Log.e("Valore del intent"," delay:  "+ejercicio_delay+ " time ejercicio: "+ejercicio_time +" num repes: "+nuemro_repes);
 
 
 
@@ -113,9 +166,9 @@ public class StartChoosingSessionActivity extends Activity {
                         // Build extras with passed in parameters
                         Bundle extras = new Bundle();
                         extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "EASY");
-                        extras.putInt(INTENT_KEY_TIME_EJERCICIO, 10);
-                        extras.putInt(INTENT_KEY_TIME_DELAY, 10);
-                        extras.putInt(INTENT_KEY_REPETICION_NUMBER, 2);
+                        extras.putInt(INTENT_KEY_TIME_EJERCICIO, ejercicio_time);
+                        extras.putInt(INTENT_KEY_TIME_DELAY, ejercicio_delay);
+                        extras.putInt(INTENT_KEY_REPETICION_NUMBER, nuemro_repes);
 
                         // Create and start intent for this activity
                         Intent intent = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);

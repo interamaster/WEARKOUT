@@ -6,6 +6,7 @@
     <string name="title_settings">Settings</string>
 
     <string name="title_location">Location</string>
+    <string name="title_salir">EXIT</string>
     <string name="title_backup_data">Data Backup</string>
     <string name="title_language">Language</string>
     <string name="title_full_screen">Full Screen</string>
@@ -24,9 +25,81 @@
     <string-array name="values_language" tools:translatable="false">
         <item>en</item>
         <item>es</item>
-        <item>fr</item>
-        <item>de</item>
+
     </string-array>
+
+
+
+    <string-array name="entries_delay_times" tools:translatable="false">
+        <item>10 segs</item>
+        <item>40 segs</item>
+        <item>1 min</item>
+
+    </string-array>
+
+    <string-array name="values_delay_times" tools:translatable="false">
+        <item>10</item>
+        <item>40</item>
+        <item>60</item>
+
+    </string-array>
+
+
+
+
+
+    <string-array name="entries_exercice_times" tools:translatable="false">
+        <item>10 segs</item>
+        <item>40 segs</item>
+        <item>1.5  min</item>
+
+    </string-array>
+
+    <string-array name="values_exercice_times" tools:translatable="false">
+        <item>10</item>
+        <item>40</item>
+        <item>90</item>
+
+    </string-array>
+
+
+
+    <string-array name="entries_numero_repeticiones" tools:translatable="false">
+        <item>1 REP</item>
+        <item>2 REP</item>
+        <item>3 REP</item>
+        <item>4 REP</item>
+        <item>5 REP</item>
+        <item>6 REP</item>
+        <item>7 REP</item>
+    </string-array>
+
+    <string-array name="values_numero_repeticiones" tools:translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+
+    </string-array>
+
+
+    <string-array name="entries_tiempo_entre_repeticiones" tools:translatable="false">
+        <item>1 min</item>
+        <item>2 min</item>
+        <item>3  min</item>
+
+    </string-array>
+
+    <string-array name="values_tiempo_entre_repeticiones" tools:translatable="false">
+        <item>60</item>
+        <item>120</item>
+        <item>180</item>
+
+    </string-array>
+
 
     <array name="icons_language">
         <item>@drawable/ic_language_en</item>

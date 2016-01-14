@@ -5,7 +5,7 @@
      android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-
+<!--
     <SwitchPreference
         android:key="use_location"
         android:title="@string/title_location"
@@ -15,7 +15,7 @@
         app:wear_iconOff="@drawable/ic_pause"
         android:defaultValue="true"
         />
-
+-->
     <ListPreference
         android:key="language"
         android:title="@string/title_language"
@@ -25,6 +25,57 @@
         app:wear_entryIcons="@array/icons_language"
         android:defaultValue="en"
         />
+
+    <ListPreference
+        android:key="delay_time"
+        android:title="DELAY TIME BETWEEN EXER/TIEMPO REPOSO ENTRE EJERCICIO"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_delay_times"
+        android:entryValues="@array/values_delay_times"
+        android:defaultValue="40"
+        />
+
+
+    <ListPreference
+        android:key="ejercicio_time"
+        android:title="EXERCICE TIME/TIEMPO EJERCICIO"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_exercice_times"
+        android:entryValues="@array/values_exercice_times"
+        android:defaultValue="10"
+        />
+
+    <ListPreference
+        android:key="numero_repeticiones"
+        android:title="REPETITIONS/REPETICIONES"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_numero_repeticiones"
+        android:entryValues="@array/values_numero_repeticiones"
+        android:defaultValue="2"
+        />
+
+
+
+
+    <ListPreference
+        android:key="tiempo_entre_repeticiones"
+        android:title="TIME BETWEEN REP/TIEMPO ENTRE REPETICIONES"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_tiempo_entre_repeticiones"
+        android:entryValues="@array/values_tiempo_entre_repeticiones"
+        android:defaultValue="120"
+        />
+
+    <com.mio.jrdv.wearkout.preference2staes2rxit
+        android:key="pref_choosen"
+        android:title="@string/title_salir"
+        android:summaryOn="SALIR"
+        android:summaryOff="@string/summary_hide"
+        app:wear_iconOn="@drawable/ic_action_done"
+
+        android:defaultValue="true"
+        />
+
 
 
 </PreferenceScreen>
