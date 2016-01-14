@@ -11,7 +11,7 @@
     tools:context="com.mio.jrdv.wearkout.MainActivity">
 
     <TextView
-        android:text="Hello World!"
+        android:text="DEJA QUE SE INSTALE EN TU RELOJ!!!!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>

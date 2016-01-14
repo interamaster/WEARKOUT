@@ -2,6 +2,7 @@ package com.mio.jrdv.wearkout.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.wearable.view.CircledImageView;
 import android.util.Log;
 import android.view.Gravity;
@@ -100,6 +102,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
     private    int NuemroEjerciciosPendientes;//para saber cuantos quedan aun
     private  int NumeroRepeticiones;//numero de repeticiones elegidas en PREFS
     private  int RepeticioesYaHechas=1;//veces que ya hemos repetido la rutina
+    private  int EjercicioDElayREPETICION;
 
 
     //para saber si ya hemos terminado todos los ejercicios
@@ -115,6 +118,14 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
     private   Sensor mHeartRateSensor;
 
 
+
+    //para las aimaciones poderlas parar sis e pulsa stop en el delay del repeticion time
+    //que es 1 ,2,o3 min
+
+    private CountDownAnimation countDownAnimation;
+    //y para que si anulamos el timer de los 1,2,3 min no salga el de delay normal
+
+    private boolean EsDelaydeRepeticion=false;
 
 
     //no lo uso
@@ -153,6 +164,14 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         EjercicioDelayTime = extras.getInt(INTENT_KEY_TIME_DELAY);
         NumeroRepeticiones=extras.getInt(INTENT_KEY_REPETICION_NUMBER);
 
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        EjercicioDElayREPETICION=Integer.parseInt(preferences.getString("tiempo_entre_repeticiones",null));
+
+        if (EjercicioDElayREPETICION==0) {
+            EjercicioDElayREPETICION=60;
+        }
 
         //le pasamos el paramB al tiempo
 
@@ -585,7 +604,77 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         //para le tag:
         int tagDelay=2;
 
-        CountDownAnimation countDownAnimation = new CountDownAnimation(textCountdown, startCount,tagDelay);
+          countDownAnimation = new CountDownAnimation(textCountdown, startCount,tagDelay);
+
+        //añadimos el listener a nosotros en el listener le diremos que si es tag=2 vaya al ChooseRightEjercico para que acabe!!
+        countDownAnimation.setCountDownListener(this);
+        //y empezamos!!!
+        countDownAnimation.start();
+
+
+
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////EMPEZAR DELAY REPETICON Ejercicio  ///////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    private void StartDelayREPETICIONanimation() {
+
+        EsDelaydeRepeticion=true;
+
+
+        //AQUI SI LO HABILITAMOS AL SER UN DELAY DE 1 ,2,3 MIN SE PUEDE ANULAR
+
+        circledImageViewOK.setEnabled(true);
+        //y lo MOSTRAMOS
+
+        circledImageViewOK.setVisibility(View.VISIBLE);
+
+        //mostramos el heratRate:
+
+        HeartRateText.setVisibility(View.VISIBLE);
+
+
+        //poenmos el gif de heart beat
+
+        Ion.with(GifVew)
+                .error(R.drawable.ic_pause)
+                .fitXY()
+                .animateGif(AnimateGifMode.ANIMATE)
+                // .load("android.resource://[packagename]" + R.drawable.optinscreen_map)
+                .load("android.resource://com.mio.jrdv.wearkout/" + R.drawable.normal_heart_rate1);
+
+
+
+
+
+
+
+
+
+        //ocultmao le progressbarview
+
+        mCircularImageView.setVisibility(View.INVISIBLE);
+
+
+
+        //otra opcion un countdown animat6ed conlistener:https://github.com/IvanRF/CountDownAnimation
+
+        int startCount = EjercicioDElayREPETICION;
+        // textCountdown = (TextView) findViewById(R.id.textcountdown);
+        //disminuimos el tamaño del delay y la posicion
+
+        textCountdown.setTextSize(65);
+
+
+        textCountdown.setGravity(Gravity.CENTER | Gravity.TOP);
+        //para le tag:
+        int tagDelay=3;
+
+          countDownAnimation = new CountDownAnimation(textCountdown, startCount,tagDelay);
 
         //añadimos el listener a nosotros en el listener le diremos que si es tag=2 vaya al ChooseRightEjercico para que acabe!!
         countDownAnimation.setCountDownListener(this);
@@ -594,6 +683,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
 
     }
+
 
 
 //////////////////////////////////////////////////////////////////listener del cpountdown///////////////////////////////////////////////////////////////////////////
@@ -645,7 +735,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
         }
 
-        if(animation.getmTag()==2){
+        if(animation.getmTag()==2 || animation.getmTag()==3){
 
             //finito delay ..siguiente ejercicio
 
@@ -814,6 +904,12 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
     public   void RecibirFinTimerSinStatic(){
         Log.e("Recibido", "fin de timer en WorkouViewActivity sin STATIC!!!");
 
+        //paramos la animacion si haia alguna...
+        if(countDownAnimation!=null){
+            countDownAnimation.cancel();
+        }
+
+
 
 
         //Si quedan ejercicos ptes
@@ -825,7 +921,16 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
            // en vez de eso que inicie el timer de DELAY TIME con cardiac gif y medidicon pulso
 
-            StartDelayanimation();
+                if (EsDelaydeRepeticion){
+                    EsDelaydeRepeticion=false;
+                    //aranacamos la actividad sin StartDelayanimation
+                    ChooseRightEjercicio();
+
+                }
+            else {
+                    StartDelayanimation();
+                }
+
 
 
         }
@@ -870,6 +975,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
                 TUTTOFINITO=false;
                 RepeticioesYaHechas=RepeticioesYaHechas+1;
+                StartDelayREPETICIONanimation();
 
             }
 
