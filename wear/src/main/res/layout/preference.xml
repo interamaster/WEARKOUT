@@ -28,7 +28,7 @@
 
     <ListPreference
         android:key="delay_time"
-        android:title="DELAY TIME BETWEEN EXER/TIEMPO REPOSO ENTRE EJERCICIO"
+        android:title="DELAY TIME BETWEEN EXER"
         android:icon="@drawable/ic_language_white_24dp"
         android:entries="@array/entries_delay_times"
         android:entryValues="@array/values_delay_times"
@@ -38,7 +38,7 @@
 
     <ListPreference
         android:key="ejercicio_time"
-        android:title="EXERCICE TIME/TIEMPO EJERCICIO"
+        android:title="EXERCICE TIME"
         android:icon="@drawable/ic_language_white_24dp"
         android:entries="@array/entries_exercice_times"
         android:entryValues="@array/values_exercice_times"
@@ -47,7 +47,7 @@
 
     <ListPreference
         android:key="numero_repeticiones"
-        android:title="REPETITIONS/REPETICIONES"
+        android:title="REPETITIONS"
         android:icon="@drawable/ic_language_white_24dp"
         android:entries="@array/entries_numero_repeticiones"
         android:entryValues="@array/values_numero_repeticiones"
@@ -59,7 +59,7 @@
 
     <ListPreference
         android:key="tiempo_entre_repeticiones"
-        android:title="TIME BETWEEN REP/TIEMPO ENTRE REPETICIONES"
+        android:title="TIME BETWEEN REP"
         android:icon="@drawable/ic_language_white_24dp"
         android:entries="@array/entries_tiempo_entre_repeticiones"
         android:entryValues="@array/values_tiempo_entre_repeticiones"

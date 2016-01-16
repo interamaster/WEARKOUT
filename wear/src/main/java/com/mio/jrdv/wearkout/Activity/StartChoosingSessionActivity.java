@@ -62,6 +62,7 @@ public class StartChoosingSessionActivity extends Activity {
     //para los valores recueprados de las prefs
 
     int ejercicio_time,ejercicio_delay,nuemro_repes;
+    private String idiomaElegidoEnPrefs;
 
 
     @Override
@@ -106,27 +107,19 @@ public class StartChoosingSessionActivity extends Activity {
 
             startActivity(new Intent(StartChoosingSessionActivity.this,
                     MyPreferenceActivity.class));
-            finish();
+            this.finish();
         }
 
-            ejercicio_time=Integer.parseInt(preferences.getString("ejercicio_time",null));
-            ejercicio_delay=Integer.parseInt(preferences.getString("delay_time",null));
-            nuemro_repes=Integer.parseInt(preferences.getString("numero_repeticiones",null));
 
 
-        if(ejercicio_delay==0){
-            ejercicio_delay=40;
-        }
+            ejercicio_time=Integer.parseInt(preferences.getString("ejercicio_time", String.valueOf(40)));//  //si no existen pongo los defaults values!!!
+            ejercicio_delay=Integer.parseInt(preferences.getString("delay_time", String.valueOf(40)));//si no existen pongo los defaults values!!!
+            nuemro_repes=Integer.parseInt(preferences.getString("numero_repeticiones", String.valueOf(2)));//  //si no existen pongo los defaults values!!!
+            idiomaElegidoEnPrefs=preferences.getString("language","en"); //si no existen pongo los defaults values!!!
 
-        if(ejercicio_time==0){
-            ejercicio_time=40;
-        }
 
-        if(nuemro_repes==0){
-            nuemro_repes=1;
-        }
 
-        Log.e("Valore del intent"," delay:  "+ejercicio_delay+ " time ejercicio: "+ejercicio_time +" num repes: "+nuemro_repes);
+        Log.e("Valore del intent"," delay:  "+ejercicio_delay+ " time ejercicio: "+ejercicio_time +" num repes: "+nuemro_repes+" idioma: "+idiomaElegidoEnPrefs);
 
 
 
