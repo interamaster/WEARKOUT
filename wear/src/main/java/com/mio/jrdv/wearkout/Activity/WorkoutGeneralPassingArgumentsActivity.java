@@ -103,6 +103,7 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
     private  int NumeroRepeticiones;//numero de repeticiones elegidas en PREFS
     private  int RepeticioesYaHechas=1;//veces que ya hemos repetido la rutina
     private  int EjercicioDElayREPETICION;
+    private  String idiomapref;//el idioma elegido
 
 
     //para saber si ya hemos terminado todos los ejercicios
@@ -168,10 +169,13 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         EjercicioDElayREPETICION=Integer.parseInt(preferences.getString("tiempo_entre_repeticiones",null));
+        idiomapref=preferences.getString("language","es");
 
         if (EjercicioDElayREPETICION==0) {
             EjercicioDElayREPETICION=60;
         }
+
+
 
         //le pasamos el paramB al tiempo
 
@@ -481,7 +485,16 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
 
         //colocamos los TEXTOs y el GIF correcto:
 
+        if (idiomapref.equals("es")){
+
+
         Titulo.setText(ejerciocioQueToca.get_name());
+
+        }
+
+        else {
+            Titulo.setText(ejerciocioQueToca.get_name_english());
+        }
 
         //lo cogemos el gif  del drawable folder!!!!
 

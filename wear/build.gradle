@@ -28,4 +28,5 @@ dependencies {
 
     compile 'me.denley.wearpreferenceactivity:wearpreferenceactivity:0.5.0@aar'//para la preferences las copio a manolibrary
     //compile project(":libs")
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
