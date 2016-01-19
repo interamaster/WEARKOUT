@@ -35,7 +35,11 @@ public class StartChoosingSessionActivity extends Activity {
     private static final int ID_START_EASY = 0;
     private static final int ID_START_MEDIUM = 1;
     private static final int ID_START_HARD = 2;
-    private static final int ID_START_SETTINGS = 3;
+    private static final int ID_START_SETTINGS = 4;
+
+    //para correas creo otro
+    private static final int ID_START_CORREAS_ESPALDA = 3;
+
 
 
     //pasamos en el intent el LEVEL y los timepos de ejerciocis y delay
@@ -203,6 +207,19 @@ public class StartChoosingSessionActivity extends Activity {
                         finish();
                         break;
 
+                    case ID_START_CORREAS_ESPALDA:
+
+                        extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "CORREASESPALDA");
+
+                        // Create and start intent for this activity
+                        Intent intent4 = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
+                        intent4.putExtras(extras);
+                        StartChoosingSessionActivity.this.startActivity(intent4);
+
+
+                        finish();
+                        break;
+
 
                     case ID_START_SETTINGS:
                         startActivity(new Intent(StartChoosingSessionActivity.this,
@@ -318,7 +335,7 @@ public class StartChoosingSessionActivity extends Activity {
 
         @Override
         public int getColumnCount(int i) {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -388,6 +405,24 @@ public class StartChoosingSessionActivity extends Activity {
 
                     }
                     break;
+
+
+                case ID_START_CORREAS_ESPALDA: {
+                    // Set a tag used to launch correct activity
+                    circleView.setTag(ID_START_CORREAS_ESPALDA);
+                    circleView.setImageResource(R.drawable.ic_bicep);
+                    if (idiomapref.equals("es")) {
+
+
+                        txtLabel.setText("Correa Espalda");
+
+                    } else {
+                        txtLabel.setText("BACK CORREA");
+
+                    }
+
+                }
+                break;
 
                     case ID_START_SETTINGS: {
                         // Set a tag used to launch correct activity
