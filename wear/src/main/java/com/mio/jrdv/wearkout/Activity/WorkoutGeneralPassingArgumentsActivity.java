@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.wearable.view.CircledImageView;
+import android.support.wearable.view.DismissOverlayView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -129,6 +130,11 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
     private boolean EsDelaydeRepeticion=false;
 
 
+
+    //para el longclick to exit:
+    private View.OnLongClickListener mlongListener;
+
+    private DismissOverlayView mDismissOverlay;
     //no lo uso
 /*
     public static void startActivity(Context context, String paramA, String paramB) {
@@ -171,6 +177,11 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         EjercicioDElayREPETICION=Integer.parseInt(preferences.getString("tiempo_entre_repeticiones",null));
         idiomapref=preferences.getString("language","es");
 
+        //pongo a false el prefchoosens para que la proxima vez al salir le vuelva a poedir elegir las prefs
+
+        //ponemos el valord e pref ya choosen a yes!!!
+        preferences.edit().putBoolean("pref_choosen",false).apply();
+
         if (EjercicioDElayREPETICION==0) {
             EjercicioDElayREPETICION=60;
         }
@@ -197,6 +208,31 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         Titulo = (TextView) findViewById(R.id.title);
 
         GifVew = (ImageView) findViewById(R.id.aniamtedgif_holder1);
+
+
+
+
+        //vamos aprobar a poner el longclick to dismiss:
+
+
+        GifVew.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                if (mlongListener != null) {
+                    mlongListener.onLongClick(v);
+                }
+                mDismissOverlay.show();
+                return true;
+            }
+        });
+
+
+
+
+
+
+
 
         HeartRateText=(TextView)findViewById(R.id.hear_rate);
 
@@ -409,6 +445,16 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         ;
 */
 
+        //para el longclick to exit!!1
+
+        mDismissOverlay = (DismissOverlayView)
+                findViewById(R.id.dismiss_overlay);
+
+        mDismissOverlay.setIntroText(R.string.long_press_intro);
+
+        mDismissOverlay.showIntroIfNecessary();
+
+
     }
 
     //////////////////////////////////////////////////////////////////Elegir Ejercicio segun SQL///////////////////////////////////////////////////////////////////////////
@@ -515,12 +561,24 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
                 .load(GifPath);
 
 
+
+
         StarTCountDounaAnimationMia();
 
 
         //cuando acabe debria empezar un delay o acabar la actitvoty si ya termino!!
 
     }
+
+    //pare l longclick to exit:
+
+    public void setOnLongClickListener(View.OnLongClickListener Longlistener) {
+        mlongListener = Longlistener;
+
+
+    }
+
+
 
     private void StarTCountDounaAnimationMia() {
 
@@ -922,6 +980,12 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
             countDownAnimation.cancel();
         }
 
+
+        //y ocultamos el beat rate!!!
+
+        //ocultamo el heratRate:
+
+        HeartRateText.setVisibility(View.INVISIBLE);
 
 
 

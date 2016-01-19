@@ -103,6 +103,8 @@ public class StartChoosingSessionActivity extends Activity {
         }
 
 
+
+
         ejercicio_time = Integer.parseInt(preferences.getString("ejercicio_time", String.valueOf(40)));//  //si no existen pongo los defaults values!!!
         ejercicio_delay = Integer.parseInt(preferences.getString("delay_time", String.valueOf(40)));//si no existen pongo los defaults values!!!
         nuemro_repes = Integer.parseInt(preferences.getString("numero_repeticiones", String.valueOf(2)));//  //si no existen pongo los defaults values!!!
@@ -139,11 +141,22 @@ public class StartChoosingSessionActivity extends Activity {
         pagerAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                //TODO ESTOS PARAMETROS DEBERA COGERLOS DE LAS PREF!!
+                // Build extras with passed in parameters
+                Bundle extras = new Bundle();
+              //  extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "EASY");
+                extras.putInt(INTENT_KEY_TIME_EJERCICIO, ejercicio_time);
+                extras.putInt(INTENT_KEY_TIME_DELAY, ejercicio_delay);
+                extras.putInt(INTENT_KEY_REPETICION_NUMBER, nuemro_repes);
+
+
                 switch ((int) v.getTag()) {
                     case ID_START_EASY:
                         // startActivity(new Intent(StartChoosingSessionActivity.this,
                         //     WorkutGeneralActivity.class));
-
+                        /*
                         //TODO ESTOS PARAMETROS DEBERA COGERLOS DE LAS PREF!!
                         // Build extras with passed in parameters
                         Bundle extras = new Bundle();
@@ -151,7 +164,9 @@ public class StartChoosingSessionActivity extends Activity {
                         extras.putInt(INTENT_KEY_TIME_EJERCICIO, ejercicio_time);
                         extras.putInt(INTENT_KEY_TIME_DELAY, ejercicio_delay);
                         extras.putInt(INTENT_KEY_REPETICION_NUMBER, nuemro_repes);
+        */
 
+                        extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "EASY");
                         // Create and start intent for this activity
                         Intent intent = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
                         intent.putExtras(extras);
@@ -161,17 +176,14 @@ public class StartChoosingSessionActivity extends Activity {
                         finish();
                         break;
                     case ID_START_MEDIUM:
-                        /*
-                        startActivity(new Intent(StartChoosingSessionActivity.this,
-                                WorkutGeneralActivity.class));*/
-                        // Build extras with passed in parameters
-                        Bundle extras2 = new Bundle();
-                        extras2.putString(INTENT_KEY_LEVEL_CHOOSEN, "Sentadillas");
-                        extras2.putString(INTENT_KEY_TIME_EJERCICIO, "Piraguismo");
+
+
+
+                        extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "MID");
 
                         // Create and start intent for this activity
                         Intent intent2 = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
-                        intent2.putExtras(extras2);
+                        intent2.putExtras(extras);
                         StartChoosingSessionActivity.this.startActivity(intent2);
 
 
@@ -179,8 +191,15 @@ public class StartChoosingSessionActivity extends Activity {
                         break;
 
                     case ID_START_HARD:
-                        startActivity(new Intent(StartChoosingSessionActivity.this,
-                                WorkutGeneralActivity.class));
+
+                        extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "PRO");
+
+                        // Create and start intent for this activity
+                        Intent intent3 = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
+                        intent3.putExtras(extras);
+                        StartChoosingSessionActivity.this.startActivity(intent3);
+
+
                         finish();
                         break;
 
@@ -250,20 +269,20 @@ public class StartChoosingSessionActivity extends Activity {
         Log.d("Insert: ", "Inserting ..");
 
         //los EASY:
-        dbhandler.addEjercicio(new Ejercicio("Flexiones", "high_plank_shoulder_touches", "flections", "EASY"));
-        dbhandler.addEjercicio(new Ejercicio("Abdominales", "android_er.gif", "abd", "EASY"));
-        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "jump_tuck_side_plank", "Superior Abs", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Flexiones", "dominadasfacil1", "flections", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Abdominales", "dominadas1", "abd", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "dominadasextrafacil1", "Superior Abs", "EASY"));
 
 
         //los MID:
-        dbhandler.addEjercicio(new Ejercicio("Flexiones", "high_plank_shoulder_touches", "flections", "MID"));
-        dbhandler.addEjercicio(new Ejercicio("Abdominales", "android_er.gif", "abd", "MID"));
+        dbhandler.addEjercicio(new Ejercicio("Flexiones", "dominadasfacil1", "flections", "MID"));
+        dbhandler.addEjercicio(new Ejercicio("Abdominales", "dominadasextrafacil1", "abd", "MID"));
         dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "jump_tuck_side_plank", "Superior Abs", "MID"));
 
         //los PRO:
         dbhandler.addEjercicio(new Ejercicio("Flexiones", "high_plank_shoulder_touches", "flections", "PRO"));
-        dbhandler.addEjercicio(new Ejercicio("Abdominales", "android_er.gif", "abd", "PRO"));
-        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "jump_tuck_side_plank", "Superior Abs", "PRO"));
+        dbhandler.addEjercicio(new Ejercicio("Abdominales", "dominadasfacil1", "abd", "PRO"));
+        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "dominadas1", "Superior Abs", "PRO"));
 
 
         // Reading all contacts

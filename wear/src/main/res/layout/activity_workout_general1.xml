@@ -84,6 +84,15 @@
                 android:src="@drawable/ic_action_done"
                 app:circle_color="#00bfa5"
                 app:circle_radius="20dp" />
+
+
+            <!-- añadimos el longpressview para informar que no existe el swipe to dismiss
+   -->
+
+            <android.support.wearable.view.DismissOverlayView
+                android:id="@+id/dismiss_overlay"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
         </FrameLayout>
 
 
