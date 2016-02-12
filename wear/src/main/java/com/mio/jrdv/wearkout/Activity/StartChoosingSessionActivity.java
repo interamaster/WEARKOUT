@@ -301,6 +301,19 @@ public class StartChoosingSessionActivity extends Activity {
         dbhandler.addEjercicio(new Ejercicio("Abdominales", "dominadasfacil1", "abd", "PRO"));
         dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "dominadas1", "Superior Abs", "PRO"));
 
+        //los DE CORREA:
+
+        dbhandler.addEjercicio(new Ejercicio("Remo Bajo", "correa_ejer1_remobajo", "Rowing low", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Remo Ancho", "correa_ejer2_remoancho", "Rowing wide", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Remo ancho 1 Brazo", "correa_ejer3_remoanchoconunbrazo", "Rowing wide 1 arm", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Remo 1 brazo", "correa_ejer4_remoconunbrazo", "Rowing 1 arm", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Aper Invert Inclinado", "correa_ejer5_apertura_invertido_inclinado", "Opening inverted inclined", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Jalones Brazos Rectos", "correa_ejer6_jalones_con_brazos_rectos", "Milestones arms straight", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Jalones Agarre Estrecho", "correa_eje7_jalon_agarre_estrecho", "Milestones grip pulldowns", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Jalones Estaticos", "correa_ejer8_jalones_lungues_estaticos", "Milestones statics", "CORREASESPALDA"));
+        dbhandler.addEjercicio(new Ejercicio("Remo Lunges", "correa_ejer11_remo_con_lunges", "Rowing Lunges", "CORREASESPALDA"));
+
+
 
         // Reading all contacts
         Log.d("Reading: ", "Reading all contacts..");
