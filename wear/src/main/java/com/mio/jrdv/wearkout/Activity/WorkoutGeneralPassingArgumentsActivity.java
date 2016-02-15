@@ -599,6 +599,20 @@ public class WorkoutGeneralPassingArgumentsActivity extends Activity implements 
         //otra opcion un countdown animat6ed conlistener:https://github.com/IvanRF/CountDownAnimation
 
         int startCount = 5;
+
+        //si es correas la intro de 20 segs para que de treimepo a colcar correas
+
+
+
+
+        //si el ejercico esde correas en vbez de 5 segs le opnemos 20 para que se puedan cambiar correas:
+
+        if (LevelChoosen.equals("CORREASESPALDA")){
+              startCount = 20;
+
+        }
+
+
         textCountdown = (TextView) findViewById(R.id.textcountdown);
         //para le tag:
         int tagNormal=1;
