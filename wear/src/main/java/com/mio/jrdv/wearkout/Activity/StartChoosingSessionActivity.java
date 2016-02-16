@@ -286,20 +286,20 @@ public class StartChoosingSessionActivity extends Activity {
         Log.d("Insert: ", "Inserting ..");
 
         //los EASY:
-        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindasextrafacil1", "flections", "EASY"));
-        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondofacil", "abd", "EASY"));
-        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "domindasextrafacil1", "Superior Abs", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindasextrafacil1", "Chin-ups", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondofacil", "Dips", "EASY"));
+        dbhandler.addEjercicio(new Ejercicio("Flexiones", "flexionesfacil1", "pushups", "EASY"));
 
 
         //los MID:
-        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindasfacil1", "flections", "MID"));
-        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondonormal", "abd", "MID"));
-        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "jump_tuck_side_plank", "Superior Abs", "MID"));
+        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindasfacil1", "Chin-ups", "MID"));
+        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondonormal", "Dips", "MID"));
+        dbhandler.addEjercicio(new Ejercicio("Flexiones", "flexionesmedio1", "pushups", "MID"));
 
         //los PRO:
-        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindas1", "flections", "PRO"));
-        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondonormal", "abd", "PRO"));
-        dbhandler.addEjercicio(new Ejercicio("Abdmoniales superiores", "dominadas1", "Superior Abs", "PRO"));
+        dbhandler.addEjercicio(new Ejercicio("Dominadas", "domindas1", "Chin-ups", "PRO"));
+        dbhandler.addEjercicio(new Ejercicio("Fondos", "fondonormal", "Dips", "PRO"));
+        dbhandler.addEjercicio(new Ejercicio("Flexiones", "flexionesnormal1", "pushups", "PRO"));
 
         //los DE CORREA:
 
