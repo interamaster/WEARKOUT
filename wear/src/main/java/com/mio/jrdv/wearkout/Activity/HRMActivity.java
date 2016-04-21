@@ -105,6 +105,13 @@ private DismissOverlayView mDismissOverlay;
     //para el valor del HRM
 private float HRMValorREAL=50;
 
+    //para el color del gif animado del HRM(verde/amarillo/rojo
+    //0=verde
+    //1=amarillo
+    //2=rojo
+
+private int HRMLevel=0;
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -305,15 +312,20 @@ public void onCountDownEnd(CountDownAnimation animation) {
 public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
 
 
+    int previousHRMValue=HRMLevel;
+
+
+
 
     //vamos a hacer que actualize su valor cada seg!!!
 
     countDownAnimation.setStartCount((int)HRMValorREAL);
+    countDownAnimation.start();
+    //esto nos notificara cada segundon para hacer que vibre en elDELAY
 
-        //esto nos notificara cada segundon para hacer que vibre en elDELAY
+    if(countDownAnimation.getmTag()==2 && (int)HRMValorREAL>80) {//TODO poenr valor real freq optima
 
-        if(countDownAnimation.getmTag()==2 && (int)HRMValorREAL>99) {
-
+        HRMLevel=1;
         //1º que vibre solo si el HRM es > XXX
 
 
@@ -325,16 +337,116 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
         // https://gearside.com/custom-vibration-patterns-mobile-devices/
         //hay que añadir un 0 al principio!!!
 
-        long[] vibrationPattern = {0, 100};
+        long[] vibrationPattern = {0, 20};
 
 
-//-1 = don't repeat
-final int indexInPatternToRepeat = -1;
+        //-1 = don't repeat
+        final int indexInPatternToRepeat = -1;
         vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
 
         //Log.e("Vibrado", "1 seg");
 
-        }
+
+
+    }
+        else if((int)HRMValorREAL>90){//TODO poner valor real de freq max
+
+        //nivel maximo
+
+        HRMLevel=2;
+
+        //que vibre mas seguido....
+
+
+        Vibrator vibrator = (Vibrator) HRMActivity.this.getSystemService(WorkoutGeneralPassingArgumentsActivity.VIBRATOR_SERVICE);
+
+
+        //go go power rangers!!!vibrate patterns:
+        // https://gearside.com/custom-vibration-patterns-mobile-devices/
+        //hay que añadir un 0 al principio!!!
+
+
+        // Start without a delay
+    // Each element then alternates between vibrate, sleep, vibrate, sleep...
+        long[] vibrationPattern = {0, 20,440,20,440};
+
+
+        //-1 = don't repeat
+        final int indexInPatternToRepeat = -1;
+        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+
+        //Log.e("Vibrado", "1 seg");
+
+    }
+
+    else {
+        //nivel normal
+
+        HRMLevel=0;
+
+        //que  NOOOO  vibre
+
+    }
+
+
+
+
+    //si ha cambiao e HRMlevel cambiamos el gif animado
+
+
+    if (previousHRMValue != HRMLevel){
+
+
+        switch (HRMLevel) {
+            case 0:
+                //normal verde
+                //poenmos el gif de heart beat
+
+                Ion.with(GifVew)
+                        .error(R.drawable.ic_pause)
+                        .fitXY()
+                        .animateGif(AnimateGifMode.ANIMATE)
+                        // .load("android.resource://[packagename]" + R.drawable.optinscreen_map)
+                        .load("android.resource://com.mio.jrdv.wearkout/" + R.drawable.normal_heart_rate1);
+
+
+
+                break;
+            case 1:
+                //alto amarillo
+
+                //poenmos el gif de heart beat
+
+                Ion.with(GifVew)
+                        .error(R.drawable.ic_pause)
+                        .fitXY()
+                        .animateGif(AnimateGifMode.ANIMATE)
+                        // .load("android.resource://[packagename]" + R.drawable.optinscreen_map)
+                        .load("android.resource://com.mio.jrdv.wearkout/" + R.drawable.yellow_heart_rate1);
+
+
+
+                break;
+            case 2:
+                //maximo rojo
+
+
+                //poenmos el gif de heart beat
+
+                Ion.with(GifVew)
+                        .error(R.drawable.ic_pause)
+                        .fitXY()
+                        .animateGif(AnimateGifMode.ANIMATE)
+                        // .load("android.resource://[packagename]" + R.drawable.optinscreen_map)
+                        .load("android.resource://com.mio.jrdv.wearkout/" + R.drawable.red_heart_rate1);
+
+
+
+
+                break;}
+
+    }
+
 
 
         }
