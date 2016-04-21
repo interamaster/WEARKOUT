@@ -35,12 +35,15 @@ public class StartChoosingSessionActivity extends Activity {
     private static final int ID_START_EASY = 0;
     private static final int ID_START_MEDIUM = 1;
     private static final int ID_START_HARD = 2;
-    private static final int ID_START_SETTINGS = 4;
+    private static final int ID_START_SETTINGS = 5;
 
     //para correas creo otro
     private static final int ID_START_CORREAS_ESPALDA = 3;
 
 
+    //para hrm(heart rater monitor) creo otro:
+
+    private static final int ID_START_HRM = 4;
 
     //pasamos en el intent el LEVEL y los timepos de ejerciocis y delay
 
@@ -221,6 +224,21 @@ public class StartChoosingSessionActivity extends Activity {
                         break;
 
 
+                    case ID_START_HRM:
+
+                        extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "HRM");
+
+                        // Create and start intent for this activity
+                        Intent intent5 = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
+                        intent5.putExtras(extras);
+                        StartChoosingSessionActivity.this.startActivity(intent5);
+
+
+                        finish();
+                        break;
+
+
+
                     case ID_START_SETTINGS:
                         startActivity(new Intent(StartChoosingSessionActivity.this,
                                 MyPreferenceActivity.class));
@@ -314,6 +332,11 @@ public class StartChoosingSessionActivity extends Activity {
         dbhandler.addEjercicio(new Ejercicio("Remo Lunges", "correa_ejer11_remo_con_lunges", "Rowing Lunges", "CORREASESPALDA"));
 
 
+        //TODO los de HRM seran el heart rate de distinto color
+
+
+
+
 
         // Reading all contacts
         Log.d("Reading: ", "Reading all contacts..");
@@ -348,8 +371,8 @@ public class StartChoosingSessionActivity extends Activity {
 
         @Override
         public int getColumnCount(int i) {
-            return 5;
-        }
+            return 6;
+        }//ahora son 6 con hrm..eran 5
 
         @Override
         public int getCurrentColumnForRow(int row, int currentColumn) {
@@ -431,6 +454,23 @@ public class StartChoosingSessionActivity extends Activity {
 
                     } else {
                         txtLabel.setText("BACK CORREA");
+
+                    }
+
+                }
+                break;
+
+                case ID_START_HRM: {
+                    // Set a tag used to launch correct activity
+                    circleView.setTag(ID_START_HRM);
+                    circleView.setImageResource(R.drawable.heart_rate_monitor);
+                    if (idiomapref.equals("es")) {
+
+
+                        txtLabel.setText("Solo Cardio");
+
+                    } else {
+                        txtLabel.setText("HR Monitor");
 
                     }
 
