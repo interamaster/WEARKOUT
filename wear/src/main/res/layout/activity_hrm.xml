@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#000000"
+    android:padding="1dp"
+    >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="1dp"
+        android:orientation="vertical"
+        app:layout_box="all">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/aniamtedgif_hrm"
+                android:layout_marginBottom="40dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:id="@+id/texthrmanimated"
+
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:shadowColor="#FFFF0000"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="8"
+                android:textColor="#ffcc0000"
+                android:textSize="130sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/circledImageViewCancel"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="1dp"
+                android:layout_gravity="bottom|left"
+                />
+
+
+            <android.support.wearable.view.CircledImageView
+                android:id="@+id/stopHRM"
+                android:layout_gravity="bottom|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/ic_action_done"
+                app:circle_color="#00bfa5"
+                app:circle_radius="20dp" />
+
+
+            <!-- añadimos el longpressview para informar que no existe el swipe to dismiss
+   -->
+
+            <android.support.wearable.view.DismissOverlayView
+                android:id="@+id/dismiss_overlay"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </FrameLayout>
+
+
+
+
+
+    </LinearLayout>
+</android.support.wearable.view.BoxInsetLayout>

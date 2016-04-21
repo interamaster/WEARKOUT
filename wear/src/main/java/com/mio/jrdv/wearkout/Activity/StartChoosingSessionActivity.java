@@ -229,7 +229,7 @@ public class StartChoosingSessionActivity extends Activity {
                         extras.putString(INTENT_KEY_LEVEL_CHOOSEN, "HRM");
 
                         // Create and start intent for this activity
-                        Intent intent5 = new Intent(StartChoosingSessionActivity.this, WorkoutGeneralPassingArgumentsActivity.class);
+                        Intent intent5 = new Intent(StartChoosingSessionActivity.this, HRMActivity.class);
                         intent5.putExtras(extras);
                         StartChoosingSessionActivity.this.startActivity(intent5);
 

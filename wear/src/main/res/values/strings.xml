@@ -29,7 +29,6 @@
     </string-array>
 
 
-
     <string-array name="entries_delay_times" tools:translatable="false">
         <item>10 segs</item>
         <item>40 segs</item>
@@ -45,9 +44,6 @@
     </string-array>
 
 
-
-
-
     <string-array name="entries_exercice_times" tools:translatable="false">
         <item>10 segs</item>
         <item>40 segs</item>
@@ -61,7 +57,6 @@
         <item>90</item>
 
     </string-array>
-
 
 
     <string-array name="entries_numero_repeticiones" tools:translatable="false">
@@ -106,6 +101,8 @@
         <item>@drawable/ic_language_es</item>
 
     </array>
+    <string name="title_activity_hrm">HRMActivity</string>
+    <string name="hello_world">Hello World!</string>
 
 
 </resources>
