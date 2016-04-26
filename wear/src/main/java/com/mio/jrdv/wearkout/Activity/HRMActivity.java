@@ -3,7 +3,7 @@ package com.mio.jrdv.wearkout.Activity;
         import android.app.Activity;
         import android.content.Intent;
         import android.content.SharedPreferences;
-        import android.graphics.drawable.Drawable;
+        import android.graphics.Color;
         import android.hardware.Sensor;
         import android.hardware.SensorEvent;
         import android.hardware.SensorEventListener;
@@ -17,23 +17,14 @@ package com.mio.jrdv.wearkout.Activity;
         import android.view.Gravity;
         import android.view.View;
         import android.view.WindowManager;
-        import android.view.animation.AlphaAnimation;
-        import android.view.animation.Animation;
-        import android.view.animation.AnimationSet;
-        import android.view.animation.ScaleAnimation;
         import android.widget.ImageView;
         import android.widget.TextView;
 
         import com.koushikdutta.ion.Ion;
         import com.koushikdutta.ion.builder.AnimateGifMode;
-        import com.mio.jrdv.wearkout.CircularProgressDrawable;
         import com.mio.jrdv.wearkout.CountDownAnimation;
         import com.mio.jrdv.wearkout.R;
-        import com.mio.jrdv.wearkout.SQL.CalesteniaDataBaseHelper;
-        import com.mio.jrdv.wearkout.model.Ejercicio;
-        import com.mio.jrdv.wearkout.model.FitnessData;
 
-        import java.util.List;
 public class HRMActivity extends Activity implements CountDownAnimation.CountDownListener, SensorEventListener {
 
 
@@ -113,6 +104,18 @@ private float HRMValorREAL=50;
 private int HRMLevel=0;
 
 
+
+    //para las pref de edad, freq_reposo y sexo
+
+    private  int freq_reposo;
+    private  int edad;
+    private  String sexo;//el idioma elegido
+
+//para el valor a usar de fre segun edad/sexo y freq_reposo(freqMAX)
+    private double freqMAX;
+    private int freqMAX70;
+    private int freqMAX80;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +172,53 @@ public boolean onLongClick(View v) {
 
         mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
+
+
+    //recuepramos de las pref los valres de freq_reposo y genero para calcular valor del HRM!!!
+
+    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+    freq_reposo=Integer.parseInt(preferences.getString("freq_reposo",null));
+    sexo=preferences.getString("genero","man");
+    edad=Integer.parseInt(preferences.getString("edad", String.valueOf(45)));
+
+
+    //a partir de eso valores sacamos la freqMAX con la formula:
+    /*
+    Fc máxima = 220-edad
+    70% Fc de trabajo según Karvonen = (Fc máxima-Fc reposo)·0,7 + Fc reposo
+
+    Intensidad muy ligera: 50-60%, útil para trabajos de recuperación, calentamiento y vuelta a la calma.
+
+Intensidad ligera: 60-70%, zona para el trabajo base de la condición física, muy recomendable para personas que se inician en el deporte
+
+Intensidad moderada: 70-80%, intervalo en el que ya se persigue un objetivo de mejora en rendimiento y se trabaja la eficiencia del corazón
+ (utilización de menos energía para la realización de un esfuerzo)
+
+Intensidad dura:80-90%, este ya es un escalón donde la fatiga aparece de manera manifiesta
+ El objetivo es ganar rendimiento y poder trabajar a alta intensidad a lo largo del tiempo.
+
+
+Intensidad máxima: 90-100%, es el máximo esfuerzo que pueden tolerar nuestros órganos y músculos, se trata de un entrenamiento anaeróbico
+que debido a su dureza sólo se puede aplicar en breves periodos de tiempo (menos de 5 minutos).
+
+
+     */
+
+        freqMAX=220-edad;
+
+   // 70% Fc de trabajo según Karvonen = (Fc máxima-Fc reposo)·0,7 + Fc reposo
+
+        freqMAX70=(int)((freqMAX-freq_reposo)*0.7 )+freq_reposo;
+
+     Log.e("70% freqMAX", String.valueOf(freqMAX70));
+
+
+    // 80% Fc de trabajo según Karvonen = (Fc máxima-Fc reposo)·0,8 + Fc reposo
+
+    freqMAX80 =(int)((freqMAX-freq_reposo)*0.8 )+freq_reposo;
+
+    Log.e("80% freqMAX", String.valueOf(freqMAX80));
 
 
         //aañdimos los listener a cancel
@@ -315,6 +365,11 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
     int previousHRMValue=HRMLevel;
 
 
+    //de momento cada seg para probar en simulador aumenta en 1 la freq
+
+   // HRMValorREAL++;//TODO lo quito pra probar enreal
+
+
 
 
     //vamos a hacer que actualize su valor cada seg!!!
@@ -323,9 +378,15 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
     countDownAnimation.start();
     //esto nos notificara cada segundon para hacer que vibre en elDELAY
 
-    if(countDownAnimation.getmTag()==2 && (int)HRMValorREAL>80) {//TODO poenr valor real freq optima
+    if(countDownAnimation.getmTag()==2 && (int)HRMValorREAL>=freqMAX70 &&(int)HRMValorREAL<freqMAX80 ) {//TODO poenr valor real freq optima
 
         HRMLevel=1;
+
+
+
+        //color VERDE esta en entre le 70 y 80% de la freqMAX
+
+        textCountdown.setTextColor(Color.GREEN);
         //1º que vibre solo si el HRM es > XXX
 
 
@@ -342,18 +403,25 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
 
         //-1 = don't repeat
         final int indexInPatternToRepeat = -1;
-        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+        //de momentyo quitp vibracion: vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
 
         //Log.e("Vibrado", "1 seg");
 
 
 
     }
-        else if((int)HRMValorREAL>90){//TODO poner valor real de freq max
+        else if((int)HRMValorREAL>=freqMAX80){//TODO poner valor real de freq max
 
         //nivel maximo
 
         HRMLevel=2;
+
+
+
+
+        //color ROJO esta a ams del 80%
+
+        textCountdown.setTextColor(Color.RED);
 
         //que vibre mas seguido....
 
@@ -373,7 +441,7 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
 
         //-1 = don't repeat
         final int indexInPatternToRepeat = -1;
-        vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
+         vibrator.vibrate(vibrationPattern, indexInPatternToRepeat);
 
         //Log.e("Vibrado", "1 seg");
 
@@ -385,6 +453,13 @@ public void onCountDown1Segundo(CountDownAnimation countDownAnimation) {
         HRMLevel=0;
 
         //que  NOOOO  vibre
+
+
+
+        //color GRIS esta en bajo nivel
+
+        textCountdown.setTextColor(Color.GRAY);
+
 
     }
 
