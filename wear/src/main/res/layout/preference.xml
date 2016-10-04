@@ -39,6 +39,34 @@
         />
 
     <ListPreference
+        android:key="genero"
+        android:title="@string/title_genero"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_genero"
+        android:entryValues="@array/values_genero"
+        app:wear_entryIcons="@array/icons_genero"
+        android:defaultValue="man"
+        />
+
+    <ListPreference
+        android:key="edad"
+        android:title="AGE APROX"
+        android:icon="@drawable/ic_language_white_24dp"
+        android:entries="@array/entries_edad"
+        android:entryValues="@array/values_edad"
+        android:defaultValue="45"
+        />
+
+    <ListPreference
+        android:key="freq_reposo"
+        android:title="RELAX FREQ APROX"
+        android:icon="@drawable/hrm_icon"
+        android:entries="@array/entries_freq_reposo"
+        android:entryValues="@array/values_freq_reposo"
+        android:defaultValue="70"
+        />
+
+    <ListPreference
         android:key="delay_time"
         android:title="DELAY TIME BETWEEN EXER"
         android:icon="@drawable/ic_language_white_24dp"

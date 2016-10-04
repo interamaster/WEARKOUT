@@ -22,11 +22,13 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //para los animated gif
+
+    //para la preferences las copio a manolibrary
+    //compile project(":libs")
     compile 'com.google.android.support:wearable:1.3.0'
     compile 'com.google.android.gms:play-services-wearable:8.4.0'
-    compile 'com.koushikdutta.ion:ion:2.+'//para los animated gif
-
-    compile 'me.denley.wearpreferenceactivity:wearpreferenceactivity:0.5.0@aar'//para la preferences las copio a manolibrary
-    //compile project(":libs")
+    compile 'com.koushikdutta.ion:ion:2.+'
+    compile 'me.denley.wearpreferenceactivity:wearpreferenceactivity:0.5.0@aar'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

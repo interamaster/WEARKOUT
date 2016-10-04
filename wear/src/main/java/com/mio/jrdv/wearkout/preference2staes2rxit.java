@@ -15,6 +15,7 @@ import preference.WearTwoStatePreference;
 
 /**
  * Created by joseramondelgado on 14/01/16.
+ * v.9 añadiso pref de genero, edad  y freq_reposo para le hrm
  */
 public class preference2staes2rxit  extends WearTwoStatePreference{
 
@@ -50,6 +51,45 @@ public class preference2staes2rxit  extends WearTwoStatePreference{
 
 
         Log.e("desde el pref","el string del idioma es: "+valor_idioma);
+
+
+
+
+        //idem sexo:
+        final String valor_genero=preferences.getString("genero",null);
+        if (valor_genero==null){
+            //ponemos el valord e pref  !!!
+            preferences.edit().putString("genero","man").apply();
+
+        }
+
+
+        Log.e("desde el pref","el string del geenero es: "+valor_genero);
+
+
+        //idem con la freq de reposo
+
+        final String valor_freq_reposo=preferences.getString("freq_reposo",null);
+
+        if (valor_freq_reposo==null){
+            //ponemos el valord e pref  !!!
+            preferences.edit().putString("freq_reposo","70").apply();
+
+        }
+        Log.e("desde el pref","el string del freq_reposo es: "+valor_freq_reposo);
+
+
+
+        //idem con la edad aprox
+
+        final String valor_edad=preferences.getString("edad",null);
+
+        if (valor_edad==null){
+            //ponemos el valord e pref  !!!
+            preferences.edit().putString("edad","45").apply();
+
+        }
+        Log.e("desde el pref","el string de la edad  es: "+valor_edad);
 
 
         //son todos Stringd no int!!!
